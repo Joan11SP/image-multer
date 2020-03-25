@@ -42,8 +42,5 @@ router.post('/saveImage', upload, async (req, res) => {
 }).post('/oneImage',async(req,res)=>{
     const image = await Image.findOne({_id:req.body._id});
     res.status(200).json(image)
-}).get('/',(req,res)=>{
-    res.render('index')
 })
-
 module.exports = router
