@@ -21,7 +21,7 @@ app.use(body_parser.urlencoded({extended:true}))
 //upload to image
 app.use(cors())
 //renderizar la vista
-app.use('/api',router)
+app.use(router)
 app.use(express.static(path.join(__dirname,'public')))
 
 //definir puerto
