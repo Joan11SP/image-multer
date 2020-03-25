@@ -2,9 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path')
 const router = require('./Routes/routes')
-//const multer = require('multer')
 require('./conectionDb')
-//const uuid=require('uuid/v4')
 const morgan = require('morgan')
 const body_parser = require('body-parser')
 const cors = require('cors')
