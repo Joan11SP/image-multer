@@ -37,7 +37,7 @@ router.post('/saveImage', upload, async (req, res) => {
     const image = new Image();
     const result = await cloudinary.v2.uploader.upload(req.file.path)
     image.filename = req.file.filename
-    image.path = req.file.filename
+    image.path = result.url
     image.nombre = req.body.nombre
     await image.save();
     console.log(result)
