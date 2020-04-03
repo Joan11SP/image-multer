@@ -3,7 +3,14 @@ const path = require('path')
 const multer = require('multer')
 const Image = require('../Models/image')
 const router = Router();
+const cloudinary = require('cloudinary')
 const uuid=require('uuid/v4')
+
+cloudinary.config({
+    cloud_name:'cloudinary-imageistl',
+    api_key:'972518515937313',
+    api_secret:'fSj7UEi3pTuzy69gKFVmVepGhcQ',
+})
 
 const storage = multer.diskStorage({
     destination: path.join(__dirname, '../public/images'),
@@ -28,12 +35,12 @@ const upload = multer({
 
 router.post('/saveImage', upload, async (req, res) => {
     const image = new Image();
+    const result = await cloudinary.v2.uploader.upload(req.file.path)
     image.filename = req.file.filename
-    image.path = '/images/' + req.file.filename
+    image.path = req.file.filename
     image.nombre = req.body.nombre
-
-    console.log(image)
     await image.save();
+    console.log(result)
     res.status(200).json({mensaje:"guardado"})
 
 }).get('/all', async (req, res) => {
